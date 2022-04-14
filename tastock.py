@@ -2,7 +2,12 @@ import numpy as np
 import talib as ta
 
 
-close = np.random.random(10)
+_close = np.random.random(10)
+_open = np.random.random(10)
+_low = np.random.random(10)
+_high = np.random.random(10)
+_volume = np.random.random(10)
+
 
 # output = ta.SMA(close)
 # print(output)
@@ -15,3 +20,5 @@ close = np.random.random(10)
 # output = ta.MOM(close,timeperiod=3)
 # print(close)
 # print(output)
+
+

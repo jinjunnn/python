@@ -31,12 +31,18 @@ pro = ts.pro_api(token)
 #设置股票池
 share = '600833.SH'
 fileName = share + '.csv'
+
 #tushare获取股票数据
+# ,ts_code,trade_date,open,high,low,close,pre_close,change,pct_chg,vol,amount
 def get_stock_data(share):
-    df = pro.query('daily', ts_code=share, start_date='20210701', end_date='20220318')
+    df = pro.query('daily', ts_code=share, start_date='20190701', end_date='20220318')
     print(df)
-    df.to_csv(fileName)
-# get_stock_data(share)
+    # df.to_csv(fileName)
+    integer = ta.CDLBELTHOLD(df.open, df.high, df.low, df.close)
+    for item in integer:
+        print(item)
+
+get_stock_data(share)
 
 
 #查询所有股票代码
@@ -48,7 +54,7 @@ def get_stock_basic():
 
 # 查询分钟行情
 def get_stock_min_exchange():
-    df = ts.pro_bar(ts_code='600833.SH', start_date='20220101', end_date='20220311' ,freq='D')
-    # df.to_csv('sharelist1.csv')
-    ta.
-get_stock_min_exchange()
+    df = ts.pro_bar(ts_code='600833.SH', start_date='2019-09-01 09:00:00', end_date='2019-09-01 13:45:00' ,freq='5min')
+    df.to_csv('sharelist1.csv')
+
+# get_stock_min_exchange()
