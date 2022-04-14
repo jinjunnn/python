@@ -21,19 +21,34 @@ import http.client
 import http.cookiejar
 import http.client
 import http.cookiejar
+import talib as ta
 
 #设置tushare pro的token并获取连接
-token = '3278de1cbf0d4396105cad9a20060f98c96faa3ca04edb68ededf647'
+ts.set_token('eb257271b6dd38501c139f0dcf7ddb949990c4384cae1f821c566884')
+token = 'eb257271b6dd38501c139f0dcf7ddb949990c4384cae1f821c566884'
 pro = ts.pro_api(token)
 
-
 #设置股票池
-stock_pool = ['600833.SH']
-
+share = '600833.SH'
+fileName = share + '.csv'
 #tushare获取股票数据
-def get_stock_data(stock_pool):
-    stock_data = pro.daily(ts_code=stock_pool, start_date='20220301', end_date='20220410')
-    print(stock_data)
-    return stock_data
+def get_stock_data(share):
+    df = pro.query('daily', ts_code=share, start_date='20210701', end_date='20220318')
+    print(df)
+    df.to_csv(fileName)
+# get_stock_data(share)
 
-get_stock_data(stock_pool)
+
+#查询所有股票代码
+def get_stock_basic():
+    data = pro.stock_basic(exchange='', list_status='L', fields='ts_code,symbol,name,area,industry,list_date')
+    data.to_csv('sharelist.csv')
+# get_stock_basic()
+
+
+# 查询分钟行情
+def get_stock_min_exchange():
+    df = ts.pro_bar(ts_code='600833.SH', start_date='20220101', end_date='20220311' ,freq='D')
+    # df.to_csv('sharelist1.csv')
+    ta.
+get_stock_min_exchange()
