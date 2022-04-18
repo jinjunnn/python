@@ -574,7 +574,7 @@ def data_calculation(dframe):
 #tushare获取股票数据
 # ,ts_code,trade_date,open,high,low,close,pre_close,change,pct_chg,vol,amount
 def get_stock_data(share):
-    df = pro.query('daily', ts_code=share, start_date='20190701', end_date='20220318')
+    df = pro.query('daily', ts_code=share, start_date='20090101', end_date='20220318')
     data_calculation(df.iloc[::-1])
 
 get_stock_data(share)
