@@ -2,7 +2,7 @@ import csv
 import pandas as pd
 import numpy as np
 
-share = pd.read_csv('/Users/pharaon/projects/python/600833.SH.csv', index_col=0)
+share = pd.read_csv('/Users/jinjun/project/python/600833.SH.csv', index_col=0)
 
 
 
@@ -68,9 +68,9 @@ def cal_x_position(row):
 
 #计算 Y 位置
 def cal_y_position(row):
-    if row['顺势指标x'] - row['顺势指标x-shift'] > 0:
+    if row['顺势指标x'] > row['顺势指标shift'] :
         return 1
-    elif row['顺势指标x'] - row['顺势指标x-shift'] < 0:
+    elif row['顺势指标x'] < row['顺势指标shift']:
         return -1
     else:
         return 0

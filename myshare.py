@@ -33,6 +33,7 @@ share = '600833.SH'
 fileName = share + '.csv'
 
 def data_calculation(dframe):
+    
     df=dframe
     _open = df['open']
     ts_code = df['ts_code']
@@ -54,13 +55,24 @@ def data_calculation(dframe):
 
     # 名称：阿隆指标
     # 简介：该指标是通过计算自价格达到近期最高值和最低值以来所经过的期间数，阿隆指标帮助你预测价格趋势到趋势区域（或者反过来，从趋势区域到趋势）的变化。
-    df['阿隆指标down'], df['阿隆指标up'] = ta.AROON(high, low, timeperiod=17)  
-    df['阿隆指标down'] = df['阿隆指标down'].fillna(1)
-    df['阿隆指标up'] = df['阿隆指标up'].fillna(1)
+    df['aroon_down_30'], df['aroon_up_30'] = ta.AROON(high, low, timeperiod=30)  
+    df['aroon_down_30'] = df['aroon_down_30'].fillna(1)
+    df['aroon_up_30'] = df['aroon_up_30'].fillna(1)
+
+    df['aroon_down_25'], df['aroon_up_25'] = ta.AROON(high, low, timeperiod=25)  
+    df['aroon_down_25'] = df['aroon_down_25'].fillna(1)
+    df['aroon_up_25'] = df['aroon_up_25'].fillna(1)
+
+    df['aroon_down_20'], df['aroon_up_20'] = ta.AROON(high, low, timeperiod=20)  
+    df['aroon_down_20'] = df['aroon_down_20'].fillna(1)
+    df['aroon_up_20'] = df['aroon_up_20'].fillna(1)
     #     名称：顺势指标
     # 简介：CCI指标专门测量股价是否已超出常态分布范围
-    df['顺势指标'] = ta.CCI(high, low, close, timeperiod=12) 
-    df['顺势指标'] = df['顺势指标'].fillna(1)
+    df['CCI_12'] = ta.CCI(high, low, close, timeperiod=12) 
+    df['CCI_12'] = df['CCI_12'].fillna(1)
+
+    df['CCI_17'] = ta.CCI(high, low, close, timeperiod=17) 
+    df['CCI_17'] = df['CCI_17'].fillna(1)
 #     # 函数名：CMO
 #     # 名称：钱德动量摆动指标
 #     # 简介：与其他动量指标摆动指标如相对强弱指标（RSI）和随机指标（KDJ）不同，钱德动量指标在计算公式的分子中采用上涨日和下跌日的数据。 计算公式：CMO=（Su－Sd）*100/（Su+Sd）
@@ -575,7 +587,7 @@ def data_calculation(dframe):
 #tushare获取股票数据
 # ,ts_code,trade_date,open,high,low,close,pre_close,change,pct_chg,vol,amount
 def get_stock_data(share):
-    df = pro.query('daily', ts_code=share, start_date='20090101', end_date='20220318')
+    df = pro.query('daily', ts_code=share, start_date='20090101', end_date='20220419')
     data_calculation(df.iloc[::-1])
 
 get_stock_data(share)
